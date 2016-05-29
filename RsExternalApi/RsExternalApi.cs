@@ -29,5 +29,48 @@ namespace RsExternalApi
                 new ServiceInstanceListener(serviceContext => new OwinCommunicationListener(Startup.ConfigureApp, serviceContext, ServiceEventSource.Current, "ServiceEndpoint"))
             };
         }
+
+        protected override Task RunAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult("");
+            //cancellationToken.ThrowIfCancellationRequested();
+            //List<Task> runners = new List<Task>();
+
+            //foreach (ActorId id in this.actorIds)
+            //{
+            //    IVisualObjectActor actorProxy = ActorProxy.Create<IVisualObjectActor>(id, this.ActorServiceUri);
+
+            //    Task t = Task.Run(
+            //        async () =>
+            //        {
+            //            while (true)
+            //            {
+            //                cancellationToken.ThrowIfCancellationRequested();
+
+            //                try
+            //                {
+            //                    this.objectBox.SetObjectString(id, await actorProxy.GetStateAsJsonAsync());
+            //                }
+            //                catch (Exception)
+            //                {
+            //                    // ignore the exceptions
+            //                    this.objectBox.SetObjectString(id, string.Empty);
+            //                }
+            //                finally
+            //                {
+            //                    this.objectBox.computeJson();
+            //                }
+
+            //                await Task.Delay(TimeSpan.FromMilliseconds(10));
+            //            }
+            //        }
+            //        ,
+            //        cancellationToken);
+
+            //    runners.Add(t);
+            //}
+
+            //return Task.WhenAll(runners);
+        }
     }
 }

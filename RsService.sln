@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RsExternalApi", "RsExternal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{58F3E742-76A7-42D3-B609-82C5E27F2269}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonObjectResponse", "CommonObjectResponse\CommonObjectResponse.csproj", "{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{58F3E742-76A7-42D3-B609-82C5E27F2269}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58F3E742-76A7-42D3-B609-82C5E27F2269}.Release|x64.ActiveCfg = Release|Any CPU
 		{58F3E742-76A7-42D3-B609-82C5E27F2269}.Release|x64.Build.0 = Release|Any CPU
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Debug|x64.ActiveCfg = Debug|x64
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Debug|x64.Build.0 = Debug|x64
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Release|Any CPU.ActiveCfg = Release|x64
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Release|x64.ActiveCfg = Release|x64
+		{B4FF8572-1FE1-4FB1-8DAD-1D43AAF4C028}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

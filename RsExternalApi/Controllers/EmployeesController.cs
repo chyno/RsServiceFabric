@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Web.Http;
 using RsExternalApi.Service;
 using System.Linq;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+using System.Threading.Tasks;
 
 namespace RsExternalApi
 {
@@ -25,8 +27,23 @@ namespace RsExternalApi
         // GET api/values/5 
         public Employee Get(int id)
         {
+            var callRes = "Success";
             var items = this.empService.GetEmployees();
-            return items.FirstOrDefault(x => x.Id == id);
+            var res = items.FirstOrDefault(x => x.Id == id);
+            if (res == null)
+            {
+                res = new Employee();
+                callRes = string.Empty;
+            }
+
+            ICommonResponseService commonClient = ServiceProxy.Create<ICommonResponseService>(
+                new Uri(@"fabric:/RsService/CommonObjectResponse"));
+            // fabric:/RsService/CommonObjectResponse 
+            var commRes = commonClient.GetCommonResponseMessage(callRes);
+            Task.WaitAll(commRes);
+            // fabric:/ CommonResponse / CommonResponseService
+            res.Description = commRes.Result;
+            return res;
         }
 
         // POST api/values 
