@@ -25,25 +25,55 @@ namespace RsExternalApi
         }
 
         // GET api/values/5 
-        public Employee Get(int id)
+        public async Task<Employee> Get(int id)
         {
             var callRes = "Success";
-            var items = this.empService.GetEmployees();
-            var res = items.FirstOrDefault(x => x.Id == id);
-            if (res == null)
+            Employee employee;
+            ICommonResponseService commonClient = ServiceProxy.Create<ICommonResponseService>(
+                 new Uri(@"fabric:/RsService/CommonObjectResponse"));
+
+            if (id == 13)
             {
-                res = new Employee();
-                callRes = string.Empty;
+                try
+                {
+                    var excep = await commonClient.GenerateTestException();
+                    employee = new Employee { Description = "This should not be set", Id = id };
+                }
+                catch (System.Exception ex)
+                {
+                    var message = ex.InnerException.Message;
+
+                    var source = ex.InnerException.Source;
+                    employee = new Employee { Description = string.Format("Message : {0}. Source {1}", message, source), Id = id };
+                }
+                    
+               
+
+            }
+            else
+            {
+                employee = empService.GetEmployees().Where(x => x.Id == id).FirstOrDefault();
+                if (employee == null)
+                {
+                    employee = new Employee();
+                    callRes = string.Empty;
+                }
+                this.SetCommonResponseDescription(ref employee, callRes, commonClient);
+               
             }
 
-            ICommonResponseService commonClient = ServiceProxy.Create<ICommonResponseService>(
-                new Uri(@"fabric:/RsService/CommonObjectResponse"));
+            return employee;
+        }
+
+        private void SetCommonResponseDescription(ref Employee employee, string callRes, ICommonResponseService commonClient)
+        {
+            
             // fabric:/RsService/CommonObjectResponse 
             var commRes = commonClient.GetCommonResponseMessage(callRes);
             Task.WaitAll(commRes);
             // fabric:/ CommonResponse / CommonResponseService
-            res.Description = commRes.Result;
-            return res;
+            employee.Description = commRes.Result;
+           
         }
 
         // POST api/values 

@@ -5,7 +5,7 @@
       <Parameter Name="RsExternalApi_InstanceCount" DefaultValue="-1" />
    </Parameters>
    <ServiceManifestImport>
-      <ServiceManifestRef ServiceManifestName="CommonObjectResponsePkg" ServiceManifestVersion="1.0.0" />
+      <ServiceManifestRef ServiceManifestName="CommonObjectResponsePkg" ServiceManifestVersion="1.0.1" />
       <ConfigOverrides />
    </ServiceManifestImport>
    <ServiceManifestImport>
